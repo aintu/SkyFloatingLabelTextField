@@ -126,6 +126,21 @@ class SkyFloatingLabelTextFieldTests: XCTestCase { // swiftlint:disable:this typ
         // then
         XCTAssertEqual(floatingLabelTextField.lineView.backgroundColor, self.customColor)
     }
+    
+    func test_whenSettingErrorColor_withUseErrorColorOnTitleIsFalse_thenLineViewBackgroundColorIsNotChangedToThisColor() {
+        
+        // given
+        let textColor = UIColor.black
+        floatingLabelTextField.textColor = textColor
+        floatingLabelTextField.errorMessage = "test"
+        
+        // when
+        floatingLabelTextField.useErrorColorOnTitle = false
+        floatingLabelTextField.errorColor = self.customColor
+        
+        // then
+        XCTAssertEqual(floatingLabelTextField.textColor, textColor)
+    }
 
     func test_whenSettingSelectedTitleColor_withTextfieldBeingSelected_thenTitleLabelTextColorIsChangedToThisColor() {
         // given

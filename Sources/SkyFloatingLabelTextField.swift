@@ -96,6 +96,13 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
         }
     }
 
+    ///A Boolean value that determines whether to use errorColor for the title label and line when the error message is not `nil`
+    @IBInspectable open var useErrorColorOnTitle:Bool = true {
+        didSet {
+            self.updateColors()
+        }
+    }
+    
     /// A UIColor value that determines the color of the bottom line when in the normal state
     @IBInspectable dynamic open var lineColor: UIColor = .lightGray {
         didSet {
@@ -395,7 +402,7 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
     }
 
     fileprivate func updateTextColor() {
-        if hasErrorMessage {
+        if self.useErrorColorOnTitle && self.hasErrorMessage {
             super.textColor = errorColor
         } else {
             super.textColor = cachedTextColor
