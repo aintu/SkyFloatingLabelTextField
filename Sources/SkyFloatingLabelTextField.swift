@@ -39,9 +39,9 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
     // MARK: Animation timing
 
     /// The value of the title appearing duration
-    dynamic open var titleFadeInDuration: TimeInterval = 0.2
+    @objc dynamic open var titleFadeInDuration: TimeInterval = 0.2
     /// The value of the title disappearing duration
-    dynamic open var titleFadeOutDuration: TimeInterval = 0.3
+    @objc dynamic open var titleFadeOutDuration: TimeInterval = 0.3
 
     // MARK: Colors
 
@@ -67,7 +67,7 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
     }
 
     /// A UIFont value that determines text color of the placeholder label
-    dynamic open var placeholderFont: UIFont? {
+    @objc dynamic open var placeholderFont: UIFont? {
         didSet {
             updatePlaceholder()
         }
@@ -77,13 +77,13 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
         if let placeholder = placeholder, let font = placeholderFont ?? font {
                 attributedPlaceholder = NSAttributedString(
                     string: placeholder,
-                    attributes: [NSForegroundColorAttributeName: placeholderColor, NSFontAttributeName: font]
+                    attributes: [NSAttributedString.Key.foregroundColor: placeholderColor, NSAttributedString.Key.font: font]
                 )
         }
     }
 
     /// A UIFont value that determines the text font of the title label
-    dynamic open var titleFont: UIFont = .systemFont(ofSize: 13) {
+    @objc dynamic open var titleFont: UIFont = .systemFont(ofSize: 13) {
         didSet {
             updateTitleLabel()
         }
@@ -296,7 +296,7 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
     /**
      Invoked when the editing state of the textfield changes. Override to respond to this change.
      */
-    open func editingChanged() {
+    @objc open func editingChanged() {
         updateControl(true)
         updateTitleLabel(true)
     }
@@ -466,7 +466,7 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
             self.titleLabel.frame = frame
         }
         if animated {
-            let animationOptions: UIViewAnimationOptions = .curveEaseOut
+            let animationOptions: UIView.AnimationOptions = .curveEaseOut
             let duration = isTitleVisible() ? titleFadeInDuration : titleFadeOutDuration
             UIView.animate(withDuration: duration, delay: 0, options: animationOptions, animations: { () -> Void in
                 updateBlock()
